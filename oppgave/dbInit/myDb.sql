@@ -42,6 +42,10 @@ ALTER TABLE `user`
   MODIFY `uid` bigint(20) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
+INSERT INTO `user` (uname, pwd, firstName, lastName)
+VALUES ('danixe', 'heihei', 'Daniel', 'Gjernes');
+VALUES ('grapee', 'heihei123', 'Maren', 'Grindal');
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
