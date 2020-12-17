@@ -34,19 +34,14 @@ class EditUser extends LitElement {
   updateUser()
   {
       let form = this.shadowRoot.getElementById('form');
-      console.log(form);
 
       let formData = new FormData();
-      formData.append('uname', form.uname.value);
-      formData.append('pwd', form.pwd.value);
+      formData.append('uname', this.user.uname);
+      formData.append('pwd', this.user.pwd);
+
       formData.append('firstName', form.firstName.value);
       formData.append('lastName', form.lastName.value);
       formData.append('uid', this.user.uid);
-
-      for(let v of formData.values())
-      {
-          console.log(v);
-      }
 
       fetch('api/updateUser.php', {
           method: 'POST',
