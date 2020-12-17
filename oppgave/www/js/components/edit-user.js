@@ -37,7 +37,8 @@ class EditUser extends LitElement {
 
       let formData = new FormData();
       formData.append('uname', this.user.uname);
-      formData.append('pwd', this.user.pwd);
+      formData.append('pwd', form.pwd.value);
+      formData.append('oldpwd', this.user.pwd);
 
       formData.append('firstName', form.firstName.value);
       formData.append('lastName', form.lastName.value);
