@@ -7,6 +7,7 @@ class EditUser extends LitElement {
     };
   }
 
+
   render()
   {
       if(this.user.uname)
@@ -17,10 +18,10 @@ class EditUser extends LitElement {
             <fieldset>
             <legend>${this.user.uname}, uid: ${this.user.uid}</legend>
 
-            Username:<br><input type="text" name="Username" value=""><br>
-            Password:<br><input type="text" name="Password" value=""><br>
-            First name:<br><input type="text" name="First name" value=""><br>
-            Last name:<br><input type="text" name="Last name" value=""><br><br>
+            Username:<br><input type="text" name="uname" value=""><br>
+            Password:<br><input type="text" name="pwd" value=""><br>
+            First name:<br><input type="text" name="firstName" value=""><br>
+            Last name:<br><input type="text" name="lastName" value=""><br><br>
             <button @click="${this.updateUser}">Submit</button>
 
             </fieldset>
@@ -32,14 +33,28 @@ class EditUser extends LitElement {
 
   updateUser()
   {
+      let form = this.shadowRoot.getElementById('form');
+      console.log(form);
+
+      let formData = new FormData();
+      formData.append('uname', form.uname.value);
+      formData.append('pwd', form.pwd.value);
+      formData.append('firstName', form.firstName.value);
+      formData.append('lastName', form.lastName.value);
+      formData.append('uid', this.user.uid);
+
+      for(let v of formData.values())
+      {
+          console.log(v);
+      }
+
       fetch('api/updateUser.php', {
           method: 'POST',
-          uname: this.user.uname,
-          firstName: this.user.firstName,
-          lastName: this.user.lastName,
-          password: this.user.pwd
+          body: formData
       }).then(response => {
-          console.log(response);
+          return response.text();
+      }).then(body => {
+          console.log(body);
       }).catch(error => console.log(error));
 
       // $.post("conn.php", { project : project },function(response){
